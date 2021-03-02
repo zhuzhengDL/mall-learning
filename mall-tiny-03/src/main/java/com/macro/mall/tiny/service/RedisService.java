@@ -12,6 +12,10 @@ public interface RedisService {
     void set(String key, String value);
 
     /**
+     * 存储数据(加过期时间)
+     */
+    void setex(String key, String value,long expireTime);
+    /**
      * 获取数据
      */
     String get(String key);

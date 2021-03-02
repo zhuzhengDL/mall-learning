@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.naming.AuthenticationException;
 import java.util.Random;
 
 /**
@@ -33,6 +34,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         //验证码绑定手机号并存储到redis
         redisService.set(REDIS_KEY_PREFIX_AUTH_CODE + telephone, sb.toString());
         redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE + telephone, AUTH_CODE_EXPIRE_SECONDS);
+//        redisService.setex(REDIS_KEY_PREFIX_AUTH_CODE + telephone,sb.toString(), AUTH_CODE_EXPIRE_SECONDS);
         return CommonResult.success(sb.toString(), "获取验证码成功");
     }
 
