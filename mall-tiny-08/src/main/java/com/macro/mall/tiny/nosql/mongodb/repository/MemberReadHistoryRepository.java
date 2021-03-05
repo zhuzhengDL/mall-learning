@@ -2,6 +2,8 @@ package com.macro.mall.tiny.nosql.mongodb.repository;
 
 
 import com.macro.mall.tiny.nosql.mongodb.document.MemberReadHistory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
@@ -16,4 +18,11 @@ public interface MemberReadHistoryRepository extends MongoRepository<MemberReadH
      * @param memberId 会员id
      */
     List<MemberReadHistory> findByMemberIdOrderByCreateTimeDesc(Long memberId);
+
+    /**
+     * 根据产品id按时间倒序获取浏览记录
+     * @param memberId 会员id
+     */
+    Page<MemberReadHistory> findByProductIdOrOrderByCreateTimeDesc(Long memberId, Pageable page);
+
 }

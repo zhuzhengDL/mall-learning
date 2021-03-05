@@ -4,6 +4,10 @@ import com.macro.mall.tiny.nosql.mongodb.document.MemberReadHistory;
 import com.macro.mall.tiny.nosql.mongodb.repository.MemberReadHistoryRepository;
 import com.macro.mall.tiny.service.MemberReadHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,6 +44,10 @@ public class MemberReadHistoryServiceImpl implements MemberReadHistoryService {
 
     @Override
     public List<MemberReadHistory> list(Long memberId) {
+
+        PageRequest page = PageRequest.of(1,30);
+//        Page<MemberReadHistory>  histories = memberReadHistoryRepository.findByProductIdOrOrderByCreateTimeDesc(memberId, page);
+
         return memberReadHistoryRepository.findByMemberIdOrderByCreateTimeDesc(memberId);
     }
 }
