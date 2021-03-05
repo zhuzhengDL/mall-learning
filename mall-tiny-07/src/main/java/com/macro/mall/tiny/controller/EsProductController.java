@@ -70,4 +70,16 @@ public class EsProductController {
         return CommonResult.success(CommonPage.restPage(esProductPage));
     }
 
+    @ApiOperation(value = "简单搜索2")
+    @RequestMapping(value = "/search/simple2", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<EsProduct>> search2(@RequestParam(required = false) String brandName,
+                                                       @RequestParam(required = false) String keyword,
+                                                       @RequestParam(required = false) String subTitle,
+                                                      @RequestParam(required = false, defaultValue = "0") Integer pageNum,
+                                                      @RequestParam(required = false, defaultValue = "5") Integer pageSize) {
+        Page<EsProduct> esProductPage = esProductService.search2(brandName,keyword,subTitle, pageNum, pageSize);
+        return CommonResult.success(CommonPage.restPage(esProductPage));
+    }
+
 }

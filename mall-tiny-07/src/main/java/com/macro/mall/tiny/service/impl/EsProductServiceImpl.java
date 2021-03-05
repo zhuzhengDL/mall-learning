@@ -45,7 +45,12 @@ public class EsProductServiceImpl implements EsProductService {
 
     @Override
     public void delete(Long id) {
-        productRepository.deleteById(id);
+//        productRepository.deleteById(id);
+        EsProduct result = new EsProduct();
+        result.setId(id);
+        result.setBrandName("小米");
+        //Id存在就直接删除了  ID 不能为空，其他参数无所谓
+        productRepository.delete(result);
     }
 
     @Override
@@ -76,6 +81,13 @@ public class EsProductServiceImpl implements EsProductService {
     public Page<EsProduct> search(String keyword, Integer pageNum, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNum, pageSize);
         return productRepository.findByNameOrSubTitleOrKeywords(keyword, keyword, keyword, pageable);
+
     }
 
+    @Override
+    public Page<EsProduct> search2(String brandName,String keyword,String subTitle, Integer pageNum, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNum, pageSize);
+        return productRepository.findByBrandName(brandName, keyword, subTitle, pageable);
+
+    }
 }
