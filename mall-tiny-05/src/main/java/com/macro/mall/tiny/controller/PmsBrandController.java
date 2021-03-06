@@ -34,7 +34,7 @@ public class PmsBrandController {
     @ApiOperation("获取所有品牌列表")
     @RequestMapping(value = "listAll", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:read')")
+//    @PreAuthorize("hasAuthority('pms:brand:read')")
     public CommonResult<List<PmsBrand>> getBrandList() {
         return CommonResult.success(brandService.listAllBrand());
     }
@@ -42,7 +42,7 @@ public class PmsBrandController {
     @ApiOperation("添加品牌")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:create')")
+//    @PreAuthorize("hasAuthority('pms:brand:create')")
     public CommonResult createBrand(@RequestBody PmsBrand pmsBrand) {
         CommonResult commonResult;
         int count = brandService.createBrand(pmsBrand);
@@ -59,7 +59,7 @@ public class PmsBrandController {
     @ApiOperation("更新指定id品牌信息")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:update')")
+//    @PreAuthorize("hasAuthority('pms:brand:update')")
     public CommonResult updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto, BindingResult result) {
         CommonResult commonResult;
         int count = brandService.updateBrand(id, pmsBrandDto);
@@ -91,10 +91,10 @@ public class PmsBrandController {
     @ApiOperation("分页查询品牌列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:read')")
-    public CommonResult<CommonPage<PmsBrand>> listBrand(@RequestParam(value = "pageNum", defaultValue = "1")
+//    @PreAuthorize("hasAuthority('pms:brand:read')")
+    public CommonResult<CommonPage<PmsBrand>> listBrand(@RequestParam(value="pageNum",defaultValue = "1")
                                                         @ApiParam("页码") Integer pageNum,
-                                                        @RequestParam(value = "pageSize", defaultValue = "3")
+                                                        @RequestParam(name="pageSizetest", defaultValue = "3")
                                                         @ApiParam("每页数量") Integer pageSize) {
         List<PmsBrand> brandList = brandService.listBrand(pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(brandList));
@@ -103,7 +103,7 @@ public class PmsBrandController {
     @ApiOperation("获取指定id的品牌详情")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    @PreAuthorize("hasAuthority('pms:brand:read')")
+//    @PreAuthorize("hasAuthority('pms:brand:read')")
     public CommonResult<PmsBrand> brand(@PathVariable("id") Long id) {
         return CommonResult.success(brandService.getBrand(id));
     }
